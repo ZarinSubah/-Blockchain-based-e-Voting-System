@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<title>User Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<style>
+html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
+
+
+/* ................................................................................................................................ */
+.form-popup {
+ opacity:1;
+ border: 1px solid rgb(96, 104, 114);
+ width:relative;
+ display: none;
+ position: relative;
+ z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+ font: solid black;
+ overflow-wrap: break-word;
+ max-width: 900px;
+ padding: 10px;
+ background-color: rgb(204, 207, 207);
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+ background-color: rgb(94, 124, 116);
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+ opacity: 1;
+}
+
+/* ......................................................................................................................... */
+
+.modal-content {
+ background-color: #fefefe;
+ margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+ border: 1px solid #888;
+ width: 80%; /* Could be more or less, depending on screen size */
+}
+
+
+.container{
+   width:500px;
+   height:400px;
+   font-size: 20px;
+   font-family: "Times New Roman";
+   text-align:center;
+   border-radius:4px;
+   margin:0 auto;
+   margin-top:150px;
+
+   
+}
+   table {
+     border-collapse: collapse;
+     width: 100%;
+     font-size: 20px;
+   }
+   
+   th, td {
+     text-align: left;
+     padding: 8px;
+       font-size: 20px;
+   }
+   
+   tr:nth-child(even) {background-color: #f2f2f2;}
+   .test{
+	width:700px;
+	height:40px;
+	
+	
+}
+
+</style>
+
+
+<body class="w3-theme-l5" onload="startTime()">
+
+<!-- Navbar -->
+<div class="w3-top">
+ <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="/" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Home</a>
+ 
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
+ 
+  <div class="w3-dropdown-hover w3-hide-small">
+    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>     
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+      <a href="#" class="w3-bar-item w3-button">New poll started.</a>
+      <a href="#" class="w3-bar-item w3-button">Election 'x' ended.</a>
+      <a href="#" class="w3-bar-item w3-button">Jatir pita jitse</a>
+    </div>
+  </div>
+  <a href="result" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Result</a>
+  <a href="logout" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+    <img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
+  </a>
+ </div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+</div>
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <!-- The Grid -->
+  <div class="w3-row">
+    <!-- Left Column -->
+    <div class="w3-col m3">
+      <!-- Profile -->
+      <div class="w3-card w3-round w3-white">
+        <div class="w3-container">
+         <h4 class="w3-center"><%= namehtml %></h4>
+         <p class="w3-center"><img src="/images/avatar.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+         <hr>
+         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
+         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> Dhaka, Bangladesh</p>
+         <!-- <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p> -->
+        </div>
+      </div>
+      <br>
+      
+      <!-- Accordion -->
+      <div class="w3-card w3-round">
+       <div class="w3-white">
+         <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Elections</button>
+         <div id="Demo1" class="w3-hide w3-container">
+           <p>Some text..</p>
+         </div>
+         <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
+         <div id="Demo2" class="w3-hide w3-container">
+           <p>Some other text..</p>
+         </div>
+
+       <button onclick="openForm()" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Keys</button>
+          <div class="form-popup" id="myForm">
+           <form class="form-container">
+             <h4>Private Key: </h4>
+             <p><%= privatekeyhtml %></p>
+             <h4>Public Key: </h4>
+             <p><%= publickeyhtml %></p>
+             <h4>Balance</h4>
+             <p><%= balancehtml %></p>
+             <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+           </form>
+         </div>
+
+       </div>      
+     </div>
+     <br>
+      
+    </div>
+    
+    <!-- Middle Column -->
+    <div class="w3-col m7">
+    
+      <div class="w3-row-padding">
+        <div class="w3-col m12">
+          <div class="w3-card w3-round w3-white">
+            <div class="w3-container w3-padding">
+              <h6 class="w3-opacity">Apply for an election</h6>
+              <p contenteditable="true" class="w3-border w3-padding">Details about the election</p>
+              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Submit</button> 
+            </div>
+          </div>
+        </div>
+      </div>
+     
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <img src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+        <span class="w3-right w3-opacity"><%= da %></span>
+        <h4>Election Y</h4><br>
+        
+        <hr class="w3-clear">
+       
+        <h4 class="w3-opacity">Enter Your Private Key</h4>
+        <form action="http://localhost:8080/valid" method="POST">
+     
+          <input type="text"class="test" name="Address" placeholder="Your Private Key..">
+    
+          <div class="w3-row-padding" style="margin:0 -16px">
+            <div class="w3-half">
+            
+              <h4 class="w3-opacity">Choose Candidate</h4>
+             
+          <select class="test" name="TAddress">
+            <option value="0443a498c09b97aac9870fbdca0a6f980f150b0b469a69d8abc0a0470a521384509a08d2e5ccf74e0b9edd62491ea2b684164d77aef0542fcd82e100eb00c9d622">Candidate 1</option>
+            <option value="0433dd9a77f0e81f7a8b2ff8eec684acad063649e983e46f4c2758762a9d309ad70708cca27823652486cc7d908027b06df8292069bdc0bf32e3a16e1b87c05751">Candidate 2</option>
+          </select>
+        </div>
+            
+      </div >
+      <br>
+          <div id="txt">  
+          </div> 
+          <br>
+          <input type="submit"  class="w3-button w3-theme-d2 w3-margin-bottom" value="Submit">
+        </form>
+      </div>
+  
+      
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <img src="/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+        <span class="w3-right w3-opacity">16 min</span>
+        <h4>Election Time</h4><br>
+  
+        <hr class="w3-clear">
+        <h4>Date: <%=edhtml%></h4>
+        <h5>Start Time: <%=lowhtml%></h5>
+        <h5>End Time: <%=uphtml%></h5>
+        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
+        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+      </div>  
+
+    </div>
+    
+    <!-- Right Column -->
+    <div class="w3-col m2">
+      <div class="w3-card w3-round w3-white w3-center">
+        <div class="w3-container">
+          <p>Upcoming Events:</p>
+          <img src="/w3images/forest.jpg" alt="Forest" style="width:100%;">
+          <p><strong>Shonibar chuti dite hobe</strong></p>
+          <p>Friday 15:00</p>
+          <p><button class="w3-button w3-block w3-theme-l4">Info</button></p>
+        </div>
+      </div>
+      <br>
+      
+  
+      
+      <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
+        <p>ADS</p>
+      </div>
+      <br>
+      
+      <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
+        <p><i class="fa fa-bug w3-xxlarge"></i></p>
+      </div>
+      
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+<!-- End Page Container -->
+</div>
+<br>
+
+<!-- Footer -->
+<footer class="w3-container w3-theme-d3 w3-padding-16">
+  <h5> </h5>
+</footer>
+
+ 
+<script>
+// Accordion
+function myFunction(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    x.previousElementSibling.className += " w3-theme-d1";
+  } else { 
+    x.className = x.className.replace("w3-show", "");
+    x.previousElementSibling.className = 
+    x.previousElementSibling.className.replace(" w3-theme-d1", "");
+  }
+}
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+// ..............................................................................................................
+function openForm() {
+ document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+ document.getElementById("myForm").style.display = "none";
+} 
+// ..............................................................................................................
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('txt').innerHTML =h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+  }
+  function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+  }
+</script>
+
+</body>
+</html> 
+
+
+
+
+
+
+
+
